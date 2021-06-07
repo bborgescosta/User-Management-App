@@ -1,5 +1,7 @@
 package usermanagement.webapplication.pitang.model;
 
+import org.junit.jupiter.api.Test;
+
 public class User {
 	private int id;
 	private String name;
@@ -21,7 +23,7 @@ public class User {
 		this.phone = phone;
 	}
 
-	
+	@Test
 	public int getId() {
 		return id;
 	}

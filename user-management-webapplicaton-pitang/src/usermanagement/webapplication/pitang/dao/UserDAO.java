@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.Test;
+
 import usermanagement.webapplication.pitang.model.*;
 
 
@@ -15,10 +17,10 @@ public class UserDAO {
 	private String jdbcURL = "jdbc:mysql://localhost:3306/demo?useTimezone=true&serverTimezone=UTC";
 	private String jdbcUsername = "root";
 	private String jdbcPassword = "root";
-
+	
 	private static final String INSERT_USERS_SQL = "INSERT INTO users" + "  (name, email, phone) VALUES "
 			+ " (?, ?, ?);";
-
+	
 	private static final String SELECT_USER_BY_ID = "select id,name,email,phone from users where id =?";
 	private static final String SELECT_ALL_USERS = "select * from users";
 	private static final String DELETE_USERS_SQL = "delete from users where id = ?;";
@@ -26,7 +28,8 @@ public class UserDAO {
 
 	public UserDAO() {
 	}
-
+	
+	@Test
 	protected Connection getConnection() {
 		Connection connection = null;
 		try {
@@ -41,7 +44,8 @@ public class UserDAO {
 		}
 		return connection;
 	}
-
+	
+	@Test
 	public void insertUser(User user) throws SQLException {
 		System.out.println(INSERT_USERS_SQL);
 		
@@ -56,7 +60,8 @@ public class UserDAO {
 			printSQLException(e);
 		}
 	}
-
+	
+	@Test
 	public User selectUser(int id) {
 		User user = null;
 		// Step 1: Establishing connection
@@ -80,7 +85,8 @@ public class UserDAO {
 		}
 		return user;
 	}
-
+	
+	@Test
 	public List<User> selectAllUsers() {
 
 	
@@ -107,7 +113,8 @@ public class UserDAO {
 		}
 		return users;
 	}
-
+	
+	@Test
 	public boolean deleteUser(int id) throws SQLException {
 		boolean rowDeleted;
 		try (Connection connection = getConnection();
@@ -117,7 +124,8 @@ public class UserDAO {
 		}
 		return rowDeleted;
 	}
-
+	
+	@Test
 	public boolean updateUser(User user) throws SQLException {
 		boolean rowUpdated;
 		try (Connection connection = getConnection();
@@ -131,7 +139,8 @@ public class UserDAO {
 		}
 		return rowUpdated;
 	}
-
+	
+	@Test
 	private void printSQLException(SQLException ex) {
 		for (Throwable e : ex) {
 			if (e instanceof SQLException) {
